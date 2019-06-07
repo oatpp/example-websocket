@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# Idea
+
+.idea/
+
+async-server/cmake-build-debug/
+server/cmake-build-debug/
+
