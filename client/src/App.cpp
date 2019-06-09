@@ -4,14 +4,13 @@
 #include "oatpp-websocket/WebSocket.hpp"
 #include "oatpp-websocket/Connector.hpp"
 
-#include "oatpp-mbedtls/client/ConnectionProvider.hpp"
-#include "oatpp-mbedtls/Config.hpp"
+#include "oatpp/network/client/SimpleTCPConnectionProvider.hpp"
 
 #include <thread>
 
 namespace {
 
-  const char* TAG = "websocket-client-mbedtls";
+  const char* TAG = "websocket-client";
 
   bool finished = false;
 
@@ -27,9 +26,7 @@ void run() {
 
   OATPP_LOGI(TAG, "Application Started");
 
-  auto config = oatpp::mbedtls::Config::createDefaultClientConfigShared();
-
-  auto connectionProvider = oatpp::mbedtls::client::ConnectionProvider::createShared(config, "echo.websocket.org", 443);
+  auto connectionProvider = oatpp::network::client::SimpleTCPConnectionProvider::createShared("echo.websocket.org", 80);
 
   auto connector = oatpp::websocket::Connector::createShared(connectionProvider);
 
