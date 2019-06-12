@@ -13,7 +13,9 @@ add_library(${project_name}-lib
         src/WSListener.hpp
         src/Model.hpp
         src/WSEventListener.hpp
+        src/AggregateTradesListener.hpp
         src/TradesListener.hpp
+        src/KlineCandlestickListener.hpp
 )
 
 ## link libs

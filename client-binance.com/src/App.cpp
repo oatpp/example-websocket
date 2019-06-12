@@ -1,6 +1,8 @@
 
 #include "WSListener.hpp"
 
+#include "KlineCandlestickListener.hpp"
+#include "AggregateTradesListener.hpp"
 #include "TradesListener.hpp"
 
 #include "oatpp-websocket/WebSocket.hpp"
@@ -20,7 +22,23 @@ namespace {
 }
 
 /**
- * Connect to "trade" tream and listen for trading events
+ * Connect to "aggregate trade" stream and listen for trading events
+ * @param connector
+ * @param objectMapper
+ */
+void readAggregateTrades(const std::shared_ptr<oatpp::websocket::Connector>& connector,
+                         const std::shared_ptr<oatpp::data::mapping::ObjectMapper>& objectMapper)
+{
+
+  auto connection = connector->connect("ws/bnbbtc@aggTrade");
+  oatpp::websocket::WebSocket socket(connection, true /* maskOutgoingMessages must be true for clients */);
+  socket.setListener(std::make_shared<AggregateTradesListener>(objectMapper));
+  socket.listen();
+
+}
+
+/**
+ * Connect to "trade" stream and listen for trading events
  * @param connector
  * @param objectMapper
  */
@@ -29,11 +47,24 @@ void readTrades(const std::shared_ptr<oatpp::websocket::Connector>& connector,
 {
 
   auto connection = connector->connect("ws/bnbbtc@trade");
-
   oatpp::websocket::WebSocket socket(connection, true /* maskOutgoingMessages must be true for clients */);
-
   socket.setListener(std::make_shared<TradesListener>(objectMapper));
+  socket.listen();
 
+}
+
+/**
+ * Connect to "Kline/Candlestick" stream and listen for events
+ * @param connector
+ * @param objectMapper
+ */
+void readCandlesticks(const std::shared_ptr<oatpp::websocket::Connector>& connector,
+                      const std::shared_ptr<oatpp::data::mapping::ObjectMapper>& objectMapper)
+{
+
+  auto connection = connector->connect("ws/bnbbtc@kline_1m");
+  oatpp::websocket::WebSocket socket(connection, true /* maskOutgoingMessages must be true for clients */);
+  socket.setListener(std::make_shared<KlineCandlestickListener>(objectMapper));
   socket.listen();
 
 }
@@ -48,7 +79,7 @@ void run() {
   auto config = oatpp::mbedtls::Config::createDefaultClientConfigShared();
 
   /* secure connection provider for stream.binance.com */
-  auto connectionProvider = oatpp::mbedtls::client::ConnectionProvider::createShared(config, "stream.binance.com", 9443);
+  auto connectionProvider = oatpp::mbedtls::client::ConnectionProvider::createShared(config, "stream.binance.com", 9443 /* port */);
 
   /* websocket connector */
   auto connector = oatpp::websocket::Connector::createShared(connectionProvider);
@@ -56,11 +87,17 @@ void run() {
   /* object mapper for DTO objects */
   auto objectMapper = oatpp::parser::json::mapping::ObjectMapper::createShared();
 
-  /* start trades read task in the thread */
-  std::thread tradesThread(readTrades, connector, objectMapper);
 
-  /* join tasks */
+  /* Start Stream Reading Tasks */
+
+  std::thread aggTradesThread(readAggregateTrades, connector, objectMapper);
+  std::thread tradesThread(readTrades, connector, objectMapper);
+  std::thread candlesticksThread(readCandlesticks, connector, objectMapper);
+
+  /* join task threads */
+  aggTradesThread.join();
   tradesThread.join();
+  candlesticksThread.join();
 
 }
 
