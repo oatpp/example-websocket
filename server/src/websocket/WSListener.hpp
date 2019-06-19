@@ -59,7 +59,7 @@ public:
   /**
    *  Called when socket is created
    */
-  void onAfterCreate(const oatpp::websocket::WebSocket& socket) override;
+  void onAfterCreate(const oatpp::websocket::WebSocket& socket, const std::shared_ptr<const ParameterMap>& params) override;
 
   /**
    *  Called before socket instance is destroyed.

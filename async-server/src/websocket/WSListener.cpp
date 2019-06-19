@@ -47,7 +47,7 @@ oatpp::async::CoroutineStarter WSListener::readMessage(const std::shared_ptr<Asy
 
 std::atomic<v_int32> WSInstanceListener::SOCKETS(0);
 
-void WSInstanceListener::onAfterCreate_NonBlocking(const std::shared_ptr<WSListener::AsyncWebSocket>& socket) {
+void WSInstanceListener::onAfterCreate_NonBlocking(const std::shared_ptr<WSListener::AsyncWebSocket>& socket, const std::shared_ptr<const ParameterMap>& params) {
 
   SOCKETS ++;
   OATPP_LOGD(TAG, "New Incoming Connection. Connection count=%d", SOCKETS.load());

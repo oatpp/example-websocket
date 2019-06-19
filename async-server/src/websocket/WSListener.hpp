@@ -59,7 +59,7 @@ public:
   /**
    *  Called when socket is created
    */
-  void onAfterCreate_NonBlocking(const std::shared_ptr<WSListener::AsyncWebSocket>& socket) override;
+  void onAfterCreate_NonBlocking(const std::shared_ptr<WSListener::AsyncWebSocket>& socket, const std::shared_ptr<const ParameterMap>& params) override;
 
   /**
    *  Called before socket instance is destroyed.

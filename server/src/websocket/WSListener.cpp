@@ -43,7 +43,7 @@ void WSListener::readMessage(const WebSocket& socket, p_char8 data, oatpp::data:
 
 std::atomic<v_int32> WSInstanceListener::SOCKETS(0);
 
-void WSInstanceListener::onAfterCreate(const oatpp::websocket::WebSocket& socket) {
+void WSInstanceListener::onAfterCreate(const oatpp::websocket::WebSocket& socket, const std::shared_ptr<const ParameterMap>& params) {
 
   SOCKETS ++;
   OATPP_LOGD(TAG, "New Incoming Connection. Connection count=%d", SOCKETS.load());
