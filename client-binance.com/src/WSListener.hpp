@@ -39,7 +39,7 @@ public:
   /**
    * Called on each message frame. After the last message will be called once-again with size == 0 to designate end of the message.
    */
-  void readMessage(const WebSocket& socket, p_char8 data, oatpp::data::v_io_size size) override;
+  void readMessage(const WebSocket& socket, v_word8 opcode, p_char8 data, oatpp::data::v_io_size size) override;
 
 public:
 

@@ -22,7 +22,7 @@ oatpp::async::CoroutineStarter WSListener::onClose(const std::shared_ptr<AsyncWe
   return nullptr; // do nothing
 }
 
-oatpp::async::CoroutineStarter WSListener::readMessage(const std::shared_ptr<AsyncWebSocket>& socket, p_char8 data, oatpp::data::v_io_size size) {
+oatpp::async::CoroutineStarter WSListener::readMessage(const std::shared_ptr<AsyncWebSocket>& socket, v_word8 opcode, p_char8 data, oatpp::data::v_io_size size) {
 
   if(size == 0) { // message transfer finished
 

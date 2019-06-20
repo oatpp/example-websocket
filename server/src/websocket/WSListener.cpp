@@ -20,7 +20,7 @@ void WSListener::onClose(const WebSocket& socket, v_word16 code, const oatpp::St
   OATPP_LOGD(TAG, "onClose code=%d", code);
 }
 
-void WSListener::readMessage(const WebSocket& socket, p_char8 data, oatpp::data::v_io_size size) {
+void WSListener::readMessage(const WebSocket& socket, v_word8 opcode, p_char8 data, oatpp::data::v_io_size size) {
 
   if(size == 0) { // message transfer finished
 
