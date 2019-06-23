@@ -57,6 +57,13 @@ $ make
 $ ./async-server-rooms-exe       # - run application.
 ```
 
+#### In Docker
+
+```
+$ docker build -t rooms-server .
+$ docker run -p 8000:8000 -t rooms-server
+```
+
 ## How to test
 
 Browser tab1:
