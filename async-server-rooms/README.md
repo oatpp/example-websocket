@@ -57,7 +57,7 @@ $ make
 $ ./async-server-rooms-exe       # - run application.
 ```
 
-#### In Docker
+### In Docker
 
 ```
 $ docker build -t rooms-server .
