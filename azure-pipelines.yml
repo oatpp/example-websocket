@@ -1,0 +1,53 @@
+jobs:
+  - job: ubuntu_16_04
+    displayName: 'Build - Ubuntu 16.04'
+    continueOnError: false
+    pool:
+      vmImage: 'Ubuntu 16.04'
+    container:
+      image: lganzzzo/ubuntu-cmake:latest
+    workspace:
+      clean: all
+    steps:
+      - script: |
+          sudo ./ci-install-mbedtls.sh
+        displayName: 'install mbedtls'
+      - script: |
+          sudo ./ci-install-oatpp-modules.sh
+        displayName: 'install oatpp modules'
+      - script: |
+          sudo cmake ..
+          sudo make
+          make test ARGS="-V"
+        workingDirectory: async-server/build
+        displayName: 'build async-server'
+      - script: |
+          sudo cmake ..
+          sudo make
+          make test ARGS="-V"
+        workingDirectory: async-server-rooms/build
+        displayName: 'build async-server-rooms'
+      - script: |
+          sudo cmake ..
+          sudo make
+          make test ARGS="-V"
+        workingDirectory: client/build
+        displayName: 'build client'
+      - script: |
+          sudo cmake ..
+          sudo make
+          make test ARGS="-V"
+        workingDirectory: client-binance.com/build
+        displayName: 'build client-binance.com'
+      - script: |
+          sudo cmake ..
+          sudo make
+          make test ARGS="-V"
+        workingDirectory: client-mbedtls/build
+        displayName: 'build client-mbedtls'
+      - script: |
+          sudo cmake ..
+          sudo make
+          make test ARGS="-V"
+        workingDirectory: server/build
+        displayName: 'build server'
