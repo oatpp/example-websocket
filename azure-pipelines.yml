@@ -16,42 +16,44 @@ jobs:
           sudo ./ci-install-oatpp-modules.sh
         displayName: 'install oatpp modules'
       - script: |
-          sudo mkdir -p async-server/build
+          mkdir -p async-server/build
+          mkdir -p async-server-rooms/build
+          mkdir -p client/build
+          mkdir -p client-binance.com/build
+          mkdir -p client-mbedtls/build
+          mkdir -p server/build
+        displayName: 'make dirs build'
+      - script: |
           sudo cmake ..
           sudo make
           make test ARGS="-V"
         workingDirectory: async-server/build
         displayName: 'build async-server'
       - script: |
-          sudo mkdir -p async-server-rooms/build
           sudo cmake ..
           sudo make
           make test ARGS="-V"
         workingDirectory: async-server-rooms/build
         displayName: 'build async-server-rooms'
       - script: |
-          sudo mkdir -p client/build
           sudo cmake ..
           sudo make
           make test ARGS="-V"
         workingDirectory: client/build
         displayName: 'build client'
       - script: |
-          sudo mkdir -p client-binance.com/build
           sudo cmake ..
           sudo make
           make test ARGS="-V"
         workingDirectory: client-binance.com/build
         displayName: 'build client-binance.com'
       - script: |
-          sudo mkdir -p client-mbedtls/build
           sudo cmake ..
           sudo make
           make test ARGS="-V"
         workingDirectory: client-mbedtls/build
         displayName: 'build client-mbedtls'
       - script: |
-          sudo mkdir -p server/build
           sudo cmake ..
           sudo make
           make test ARGS="-V"
