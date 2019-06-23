@@ -1,6 +1,6 @@
 # websocket server
 
-Simple example of the **multithreaded** websocket echo server. Build with oat++ (AKA oatpp) web framework.
+Simple example of the **multithreaded** websocket echo server. Built with oat++ (AKA oatpp) web framework.
 
 See more:
 
