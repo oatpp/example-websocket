@@ -1,6 +1,6 @@
 # websocket async-server
 
-Simple example of the asynchronous websocket echo server.
+Simple example of the **asynchronous** websocket echo server. Built with oat++ (AKA oatpp) web framework.
 
 See more:
 
