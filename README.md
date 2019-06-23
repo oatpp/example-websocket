@@ -1,4 +1,4 @@
-# example-websocket
+# example-websocket [![Build Status](https://dev.azure.com/lganzzzo/lganzzzo/_apis/build/status/oatpp.example-websocket?branchName=master)](https://dev.azure.com/lganzzzo/lganzzzo/_build/latest?definitionId=20&branchName=master)
 
 Collection of oatpp WebSocket examples.
 
