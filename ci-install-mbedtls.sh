@@ -15,4 +15,4 @@ make
 make test
 make install
 
-cd ../
+cd ../../../
