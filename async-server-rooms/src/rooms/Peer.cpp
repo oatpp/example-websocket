@@ -53,7 +53,7 @@ oatpp::async::CoroutineStarter Peer::onClose(const std::shared_ptr<AsyncWebSocke
   return nullptr; // do nothing
 }
 
-oatpp::async::CoroutineStarter Peer::readMessage(const std::shared_ptr<AsyncWebSocket>& socket, v_word8 opcode, p_char8 data, oatpp::data::v_io_size size) {
+oatpp::async::CoroutineStarter Peer::readMessage(const std::shared_ptr<AsyncWebSocket>& socket, v_word8 opcode, p_char8 data, oatpp::v_io_size size) {
 
   if(size == 0) { // message transfer finished
 
@@ -63,7 +63,7 @@ oatpp::async::CoroutineStarter Peer::readMessage(const std::shared_ptr<AsyncWebS
     m_room->sendMessage(m_nickname + ": " + wholeMessage);
 
   } else if(size > 0) { // message frame received
-    m_messageBuffer.write(data, size);
+    m_messageBuffer.writeSimple(data, size);
   }
 
   return nullptr; // do nothing

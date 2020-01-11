@@ -21,7 +21,7 @@ void WSListener::onClose(const WebSocket& socket, v_word16 code, const oatpp::St
   OATPP_LOGD(TAG, "onClose code=%d", code);
 }
 
-void WSListener::readMessage(const WebSocket& socket, v_word8 opcode, p_char8 data, oatpp::data::v_io_size size) {
+void WSListener::readMessage(const WebSocket& socket, v_word8 opcode, p_char8 data, oatpp::v_io_size size) {
 
   if(size == 0) { // message transfer finished
 
@@ -35,7 +35,7 @@ void WSListener::readMessage(const WebSocket& socket, v_word8 opcode, p_char8 da
     //socket.sendOneFrameText( "Hello from oatpp!: " + wholeMessage);
 
   } else if(size > 0) { // message frame received
-    m_messageBuffer.write(data, size);
+    m_messageBuffer.writeSimple(data, size);
   }
 
 }
