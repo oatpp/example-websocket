@@ -17,11 +17,11 @@ void WSListener::onPong(const WebSocket& socket, const oatpp::String& message) {
   OATPP_LOGD(TAG, "onPong");
 }
 
-void WSListener::onClose(const WebSocket& socket, v_word16 code, const oatpp::String& message) {
+void WSListener::onClose(const WebSocket& socket, v_uint16 code, const oatpp::String& message) {
   OATPP_LOGD(TAG, "onClose code=%d", code);
 }
 
-void WSListener::readMessage(const WebSocket& socket, v_word8 opcode, p_char8 data, oatpp::v_io_size size) {
+void WSListener::readMessage(const WebSocket& socket, v_uint8 opcode, p_char8 data, oatpp::v_io_size size) {
 
   if(size == 0) { // message transfer finished
 

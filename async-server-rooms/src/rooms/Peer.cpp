@@ -49,11 +49,11 @@ oatpp::async::CoroutineStarter Peer::onPong(const std::shared_ptr<AsyncWebSocket
   return nullptr; // do nothing
 }
 
-oatpp::async::CoroutineStarter Peer::onClose(const std::shared_ptr<AsyncWebSocket>& socket, v_word16 code, const oatpp::String& message) {
+oatpp::async::CoroutineStarter Peer::onClose(const std::shared_ptr<AsyncWebSocket>& socket, v_uint16 code, const oatpp::String& message) {
   return nullptr; // do nothing
 }
 
-oatpp::async::CoroutineStarter Peer::readMessage(const std::shared_ptr<AsyncWebSocket>& socket, v_word8 opcode, p_char8 data, oatpp::v_io_size size) {
+oatpp::async::CoroutineStarter Peer::readMessage(const std::shared_ptr<AsyncWebSocket>& socket, v_uint8 opcode, p_char8 data, oatpp::v_io_size size) {
 
   if(size == 0) { // message transfer finished
 

@@ -17,12 +17,12 @@ oatpp::async::CoroutineStarter WSListener::onPong(const std::shared_ptr<AsyncWeb
   return nullptr; // do nothing
 }
 
-oatpp::async::CoroutineStarter WSListener::onClose(const std::shared_ptr<AsyncWebSocket>& socket, v_word16 code, const oatpp::String& message) {
+oatpp::async::CoroutineStarter WSListener::onClose(const std::shared_ptr<AsyncWebSocket>& socket, v_uint16 code, const oatpp::String& message) {
   OATPP_LOGD(TAG, "onClose code=%d", code);
   return nullptr; // do nothing
 }
 
-oatpp::async::CoroutineStarter WSListener::readMessage(const std::shared_ptr<AsyncWebSocket>& socket, v_word8 opcode, p_char8 data, oatpp::v_io_size size) {
+oatpp::async::CoroutineStarter WSListener::readMessage(const std::shared_ptr<AsyncWebSocket>& socket, v_uint8 opcode, p_char8 data, oatpp::v_io_size size) {
 
   if(size == 0) { // message transfer finished
 
