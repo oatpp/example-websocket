@@ -20,6 +20,11 @@ add_library(${project_name}-lib
 
 ## link libs
 
+include(FindPkgConfig)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake/module") # <-- use Findmbedtls.cmake in /cmake/module folder
+
+find_package(mbedtls 2.16.0 REQUIRED)
+
 find_package(oatpp              1.0.0 REQUIRED)
 find_package(oatpp-websocket    1.0.0 REQUIRED)
 find_package(oatpp-mbedtls      1.0.0 REQUIRED)
