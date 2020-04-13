@@ -17,3 +17,4 @@ See more:
 - [Oat++ Website](https://oatpp.io/)
 - [Oat++ Github Repository](https://github.com/oatpp/oatpp)
 - [Get Started With Oat++](https://oatpp.io/docs/start)
+- [Can-Chat](https://github.com/lganzzzo/canchat) - Feature-complete rooms-based chat for tens of thousands users. Client plus Server.
