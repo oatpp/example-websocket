@@ -1,7 +1,3 @@
-//
-// Created by Leonid  on 2019-06-12.
-//
-
 #ifndef KlineCandlestickListener_hpp
 #define KlineCandlestickListener_hpp
 
@@ -21,13 +17,13 @@ public:
   void onEvent(const Candlestick::ObjectWrapper& obj) override {
 
     OATPP_LOGI("Kline/Candlesticks", "%s - startTime=%d, closeTime=%d / openPrice=%s, closePrice=%s, highPrice=%s, lowPrice=%s",
-      obj->symbol->getData(),
-      obj->kline->klineStartTime->getValue(),
-      obj->kline->klineCloseTime->getValue(),
-      obj->kline->openPrice->getData(),
-      obj->kline->closePrice->getData(),
-      obj->kline->highPrice->getData(),
-      obj->kline->lowPrice->getData()
+      obj->symbol->c_str(),
+      *obj->kline->klineStartTime,
+      *obj->kline->klineCloseTime,
+      obj->kline->openPrice->c_str(),
+      obj->kline->closePrice->c_str(),
+      obj->kline->highPrice->c_str(),
+      obj->kline->lowPrice->c_str()
     );
 
   }

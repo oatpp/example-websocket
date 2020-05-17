@@ -1,6 +1,3 @@
-//
-// Created by Leonid  on 2019-03-25.
-//
 
 #include "WSTest.hpp"
 

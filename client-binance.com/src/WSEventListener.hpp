@@ -1,6 +1,3 @@
-//
-// Created by Leonid  on 2019-06-12.
-//
 
 #ifndef WSEventListener_hpp
 #define WSEventListener_hpp

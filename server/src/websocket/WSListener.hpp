@@ -1,7 +1,3 @@
-//
-// Created by Leonid  on 2019-06-07.
-//
-
 #ifndef WSListener_hpp
 #define WSListener_hpp
 

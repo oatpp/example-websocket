@@ -1,6 +1,3 @@
-//
-// Created by Leonid  on 2019-06-12.
-//
 
 #ifndef TradesListener_hpp
 #define TradesListener_hpp
@@ -21,10 +18,10 @@ public:
   void onEvent(const Trade::ObjectWrapper& trade) override {
 
     OATPP_LOGI("Trades", "%s - quantity=%s, price=%s, time=%d",
-      trade->symbol->getData(),
-      trade->quantity->getData(),
-      trade->price->getData(),
-      trade->tradeTime->getValue()
+      trade->symbol->c_str(),
+      trade->quantity->c_str(),
+      trade->price->c_str(),
+      *trade->tradeTime
     );
 
   }
