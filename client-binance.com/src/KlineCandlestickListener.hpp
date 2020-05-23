@@ -7,14 +7,14 @@
 /**
  * Listener for Trade events
  */
-class KlineCandlestickListener : public WSEventListener<Candlestick> {
+class KlineCandlestickListener : public WSEventListener<oatpp::Object<Candlestick>> {
 public:
 
   KlineCandlestickListener(const std::shared_ptr<oatpp::data::mapping::ObjectMapper>& mapper)
-    : WSEventListener<Candlestick>(mapper)
+    : WSEventListener<oatpp::Object<Candlestick>>(mapper)
   {}
 
-  void onEvent(const Candlestick::ObjectWrapper& obj) override {
+  void onEvent(const oatpp::Object<Candlestick>& obj) override {
 
     OATPP_LOGI("Kline/Candlesticks", "%s - startTime=%d, closeTime=%d / openPrice=%s, closePrice=%s, highPrice=%s, lowPrice=%s",
       obj->symbol->c_str(),

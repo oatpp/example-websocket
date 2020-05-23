@@ -11,9 +11,9 @@
  * DTO representing "Aggregate Trade Stream" object from binance-exchange.
  * See https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#aggregate-trade-streams
  */
-class AggregateTrade : public oatpp::Object {
+class AggregateTrade : public oatpp::DTO {
 
-  DTO_INIT(AggregateTrade, Object)
+  DTO_INIT(AggregateTrade, DTO)
 
   DTO_FIELD(String, eventType, "e");
   DTO_FIELD(Int64, eventTime, "E");
@@ -33,9 +33,9 @@ class AggregateTrade : public oatpp::Object {
  * DTO representing "Trade Stream" object from binance-exchange.
  * See https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#trade-streams
  */
-class Trade : public oatpp::Object {
+class Trade : public oatpp::DTO {
 
-  DTO_INIT(Trade, Object)
+  DTO_INIT(Trade, DTO)
 
   DTO_FIELD(String, eventType, "e");
   DTO_FIELD(Int64, eventTime, "E");
@@ -54,9 +54,9 @@ class Trade : public oatpp::Object {
 /**
  * Nested object for Candlestick
  */
-class Kline : public oatpp::Object {
+class Kline : public oatpp::DTO {
 
-  DTO_INIT(Kline, Object)
+  DTO_INIT(Kline, DTO)
 
   DTO_FIELD(Int64, klineStartTime, "t");
   DTO_FIELD(Int64, klineCloseTime, "T");
@@ -86,14 +86,14 @@ class Kline : public oatpp::Object {
  * DTO representing "Kline/Candlestick Stream" object from binance-exchange.
  * See https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md#klinecandlestick-streams
  */
-class Candlestick : public oatpp::Object {
+class Candlestick : public oatpp::DTO {
 
-  DTO_INIT(Candlestick, Object)
+  DTO_INIT(Candlestick, DTO)
 
   DTO_FIELD(String, eventType, "e");
   DTO_FIELD(Int64, eventTime, "E");
   DTO_FIELD(String, symbol, "s");
-  DTO_FIELD(Kline::ObjectWrapper, kline, "k");
+  DTO_FIELD(Object<Kline>, kline, "k");
 
 };
 

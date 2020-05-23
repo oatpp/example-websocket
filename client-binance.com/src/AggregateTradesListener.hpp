@@ -8,14 +8,14 @@
 /**
  * Listener for Aggregate Trade events
  */
-class AggregateTradesListener : public WSEventListener<AggregateTrade> {
+class AggregateTradesListener : public WSEventListener<oatpp::Object<AggregateTrade>> {
 public:
 
   AggregateTradesListener(const std::shared_ptr<oatpp::data::mapping::ObjectMapper>& mapper)
-    : WSEventListener<AggregateTrade>(mapper)
+    : WSEventListener<oatpp::Object<AggregateTrade>>(mapper)
   {}
 
-  void onEvent(const AggregateTrade::ObjectWrapper& trade) override {
+  void onEvent(const oatpp::Object<AggregateTrade>& trade) override {
 
     OATPP_LOGI("AggregateTrades", "%s - quantity=%s, price=%s, time=%d / firstTradeId=%d, lastTradeId=%d",
       trade->symbol->c_str(),

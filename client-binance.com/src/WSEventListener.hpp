@@ -26,7 +26,7 @@ public:
     onEvent(eventObject);
   }
 
-  virtual void onEvent(const typename T::ObjectWrapper& eventObject) = 0;
+  virtual void onEvent(const T& eventObject) = 0;
 
 };
 

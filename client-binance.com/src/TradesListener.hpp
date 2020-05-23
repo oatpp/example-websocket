@@ -8,14 +8,14 @@
 /**
  * Listener for Trade events
  */
-class TradesListener : public WSEventListener<Trade> {
+class TradesListener : public WSEventListener<oatpp::Object<Trade>> {
 public:
 
   TradesListener(const std::shared_ptr<oatpp::data::mapping::ObjectMapper>& mapper)
-    : WSEventListener<Trade>(mapper)
+    : WSEventListener<oatpp::Object<Trade>>(mapper)
   {}
 
-  void onEvent(const Trade::ObjectWrapper& trade) override {
+  void onEvent(const oatpp::Object<Trade>& trade) override {
 
     OATPP_LOGI("Trades", "%s - quantity=%s, price=%s, time=%d",
       trade->symbol->c_str(),
