@@ -79,7 +79,7 @@ void run() {
   auto config = oatpp::mbedtls::Config::createDefaultClientConfigShared();
 
   /* secure connection provider for stream.binance.com */
-  auto connectionProvider = oatpp::mbedtls::client::ConnectionProvider::createShared(config, "stream.binance.com", 9443 /* port */);
+  auto connectionProvider = oatpp::mbedtls::client::ConnectionProvider::createShared(config, {"stream.binance.com", 9443 /* port */});
 
   /* websocket connector */
   auto connector = oatpp::websocket::Connector::createShared(connectionProvider);

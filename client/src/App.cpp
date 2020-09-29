@@ -4,7 +4,7 @@
 #include "oatpp-websocket/WebSocket.hpp"
 #include "oatpp-websocket/Connector.hpp"
 
-#include "oatpp/network/client/SimpleTCPConnectionProvider.hpp"
+#include "oatpp/network/tcp/client/ConnectionProvider.hpp"
 
 #include <thread>
 
@@ -26,7 +26,7 @@ void run() {
 
   OATPP_LOGI(TAG, "Application Started");
 
-  auto connectionProvider = oatpp::network::client::SimpleTCPConnectionProvider::createShared("echo.websocket.org", 80);
+  auto connectionProvider = oatpp::network::tcp::client::ConnectionProvider::createShared({"echo.websocket.org", 80});
 
   auto connector = oatpp::websocket::Connector::createShared(connectionProvider);
 

@@ -6,7 +6,7 @@
 
 #include "oatpp/web/server/api/ApiController.hpp"
 
-#include "oatpp/network/server/ConnectionHandler.hpp"
+#include "oatpp/network/ConnectionHandler.hpp"
 
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/core/macro/component.hpp"
@@ -20,7 +20,7 @@ class MyController : public oatpp::web::server::api::ApiController {
 private:
   typedef MyController __ControllerType;
 private:
-  OATPP_COMPONENT(std::shared_ptr<oatpp::network::server::ConnectionHandler>, websocketConnectionHandler, "websocket");
+  OATPP_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>, websocketConnectionHandler, "websocket");
 public:
   MyController(OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper))
     : oatpp::web::server::api::ApiController(objectMapper)

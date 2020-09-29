@@ -29,7 +29,7 @@ void run() {
 
   auto config = oatpp::mbedtls::Config::createDefaultClientConfigShared();
 
-  auto connectionProvider = oatpp::mbedtls::client::ConnectionProvider::createShared(config, "echo.websocket.org", 443);
+  auto connectionProvider = oatpp::mbedtls::client::ConnectionProvider::createShared(config, {"echo.websocket.org", 443});
 
   auto connector = oatpp::websocket::Connector::createShared(connectionProvider);
 
