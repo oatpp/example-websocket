@@ -26,11 +26,11 @@ void run() {
 
   OATPP_LOGI(TAG, "Application Started");
 
-  auto connectionProvider = oatpp::network::tcp::client::ConnectionProvider::createShared({"echo.websocket.org", 80});
+  auto connectionProvider = oatpp::network::tcp::client::ConnectionProvider::createShared({"demo.piesocket.com", 80});
 
   auto connector = oatpp::websocket::Connector::createShared(connectionProvider);
 
-  auto connection = connector->connect("/");
+  auto connection = connector->connect("v3/channel_1?api_key=oCdCMcMPQpbvNjUIzqtvF1d2X2okWpDQj4AwARJuAgtjhzKxVEjQU6IdCjwm&notify_self");
 
   OATPP_LOGI(TAG, "Connected");
 

@@ -29,12 +29,12 @@ void run() {
 
   auto config = oatpp::mbedtls::Config::createDefaultClientConfigShared();
 
-  oatpp::network::Address address("echo.websocket.org", 443);
+  oatpp::network::Address address("demo.piesocket.com", 443);
   auto connectionProvider = oatpp::mbedtls::client::ConnectionProvider::createShared(config, address);
 
   auto connector = oatpp::websocket::Connector::createShared(connectionProvider);
 
-  auto connection = connector->connect("/");
+  auto connection = connector->connect("v3/channel_1?api_key=oCdCMcMPQpbvNjUIzqtvF1d2X2okWpDQj4AwARJuAgtjhzKxVEjQU6IdCjwm&notify_self");
 
   OATPP_LOGI(TAG, "Connected");
 

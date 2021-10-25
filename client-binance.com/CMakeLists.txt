@@ -25,9 +25,9 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake/module") # <--
 
 find_package(mbedtls 2.16.0 REQUIRED)
 
-find_package(oatpp              1.2.5 REQUIRED)
-find_package(oatpp-websocket    1.2.5 REQUIRED)
-find_package(oatpp-mbedtls      1.2.5 REQUIRED)
+find_package(oatpp              1.3.0 REQUIRED)
+find_package(oatpp-websocket    1.3.0 REQUIRED)
+find_package(oatpp-mbedtls      1.3.0 REQUIRED)
 
 target_link_libraries(${project_name}-lib
         ## oatpp
