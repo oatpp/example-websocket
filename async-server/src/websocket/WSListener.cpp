@@ -24,7 +24,7 @@ oatpp::async::CoroutineStarter WSListener::readMessage(const std::shared_ptr<Asy
   if(size == 0) { // message transfer finished
 
     auto wholeMessage = m_messageBuffer.toString();
-    m_messageBuffer.clear();
+    m_messageBuffer.setCurrentPosition(0);
 
     OATPP_LOGD(TAG, "onMessage message='%s'", wholeMessage->c_str());
 

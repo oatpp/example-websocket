@@ -23,7 +23,7 @@ void WSListener::readMessage(const WebSocket& socket, v_uint8 opcode, p_char8 da
   if(size == 0) { // message transfer finished
 
     auto wholeMessage = m_messageBuffer.toString();
-    m_messageBuffer.clear();
+    m_messageBuffer.setCurrentPosition(0);
 
     OATPP_LOGD(TAG, "on message received '%s'", wholeMessage->c_str());
 
