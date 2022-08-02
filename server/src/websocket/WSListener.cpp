@@ -1,5 +1,6 @@
 
 #include "WSListener.hpp"
+#include <thread>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // WSListener
@@ -27,7 +28,8 @@ void WSListener::readMessage(const WebSocket& socket, v_uint8 opcode, p_char8 da
     OATPP_LOGD(TAG, "onMessage message='%s'", wholeMessage->c_str());
 
     /* Send message in reply */
-    socket.sendOneFrameText( "Hello from oatpp!: " + wholeMessage);
+    /* USE SOCKET HANDLE INSTEAD OF A BARE SOCKET!!! */
+    m_socketHandle->socketWrite( "Hello from oatpp!: " + wholeMessage);
 
   } else if(size > 0) { // message frame received
     m_messageBuffer.writeSimple(data, size);
@@ -47,7 +49,21 @@ void WSInstanceListener::onAfterCreate(const oatpp::websocket::WebSocket& socket
 
   /* In this particular case we create one WSListener per each connection */
   /* Which may be redundant in many cases */
-  socket.setListener(std::make_shared<WSListener>());
+
+  auto socketHandle = std::make_shared<SocketHandle>(&socket);
+  socket.setListener(std::make_shared<WSListener>(socketHandle));
+
+  std::thread t([socketHandle]{
+      OATPP_LOGD("Task", "tread started");
+      while (socketHandle->isValid()) {
+          socketHandle->socketWrite("Hello From Thread!!!");
+          std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+      }
+      OATPP_LOGD("Task", "tread stopped");
+  });
+
+  t.detach();
+
 }
 
 void WSInstanceListener::onBeforeDestroy(const oatpp::websocket::WebSocket& socket) {

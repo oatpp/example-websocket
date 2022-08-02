@@ -4,6 +4,38 @@
 #include "oatpp-websocket/ConnectionHandler.hpp"
 #include "oatpp-websocket/WebSocket.hpp"
 
+
+/**
+ *
+ */
+class SocketHandle {
+private:
+    const oatpp::websocket::WebSocket* m_socket;
+    std::mutex m_mutex;
+public:
+
+    SocketHandle(const oatpp::websocket::WebSocket* pSocket)
+        : m_socket(pSocket)
+    {}
+
+    void socketWrite(const oatpp::String& text) {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        if(m_socket)
+            m_socket->sendOneFrameText(text);
+    }
+
+    void invalidate() {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        m_socket = nullptr;
+    }
+
+    bool isValid() {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        return m_socket != nullptr;
+    }
+
+};
+
 /**
  * WebSocket listener listens on incoming WebSocket events.
  */
@@ -11,11 +43,20 @@ class WSListener : public oatpp::websocket::WebSocket::Listener {
 private:
   static constexpr const char* TAG = "Server_WSListener";
 private:
+    std::shared_ptr<SocketHandle> m_socketHandle;
   /**
    * Buffer for messages. Needed for multi-frame messages.
    */
   oatpp::data::stream::BufferOutputStream m_messageBuffer;
 public:
+
+    WSListener(const std::shared_ptr<SocketHandle>& socketHandle)
+        : m_socketHandle(socketHandle)
+    {}
+
+    ~WSListener() {
+        m_socketHandle->invalidate();
+    }
 
   /**
    * Called on "ping" frame.
@@ -37,6 +78,13 @@ public:
    */
   void readMessage(const WebSocket& socket, v_uint8 opcode, p_char8 data, oatpp::v_io_size size) override;
 
+};
+
+class WSTask {
+private:
+    std::shared_ptr<SocketHandle> m_handle;
+public:
+    WSTask(const std::shared_ptr<SocketHandle>& socketHandle);
 };
 
 /**
