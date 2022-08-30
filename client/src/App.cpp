@@ -30,7 +30,7 @@ void run() {
 
   auto connector = oatpp::websocket::Connector::createShared(connectionProvider);
 
-  auto connection = connector->connect("v3/channel_1?api_key=oCdCMcMPQpbvNjUIzqtvF1d2X2okWpDQj4AwARJuAgtjhzKxVEjQU6IdCjwm&notify_self");
+  auto connection = connector->connect("v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self");
 
   OATPP_LOGI(TAG, "Connected");
 
